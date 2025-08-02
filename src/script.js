@@ -12,28 +12,40 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 
 async function onSearch(e) {
   e.preventDefault();
-  const query = e.target.elements.query.value.trim();
-  if (!query) return;
 
-  currentQuery = query;
+  const input = e.target.querySelector('input[name="query"]');
+  const value = input.value.trim();
+  if (!value) return;
+
+  currentQuery = value;
   currentPage = 1;
   gallery.innerHTML = '';
-  const images = await fetchImages(currentQuery, currentPage);
-  renderImages(images);
-  loadMoreBtn.style.display = images.length < 12 ? 'none' : 'block';
+
+  try {
+    const images = await fetchImages(currentQuery, currentPage);
+    renderImages(images);
+    loadMoreBtn.style.display = images.length < 12 ? 'none' : 'block';
+  } catch (error) {
+    console.error('Помилка під час пошуку зображень:', error);
+  }
 }
 
 async function onLoadMore() {
   currentPage += 1;
-  const images = await fetchImages(currentQuery, currentPage);
-  renderImages(images);
 
-  const lastCard = gallery.lastElementChild;
-  if (lastCard) {
-    lastCard.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  try {
+    const images = await fetchImages(currentQuery, currentPage);
+    renderImages(images);
+
+    const lastCard = gallery.lastElementChild;
+    if (lastCard) {
+      lastCard.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    loadMoreBtn.style.display = images.length < 12 ? 'none' : 'block';
+  } catch (error) {
+    console.error('Помилка під час завантаження зображень:', error);
   }
-
-  loadMoreBtn.style.display = images.length < 12 ? 'none' : 'block';
 }
 
 function renderImages(images) {
