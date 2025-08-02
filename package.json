@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx parcel src/index.html",
-    "server": "npx json-server students.json",
     "build": "parcel build src/index.html --no-cache",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build"

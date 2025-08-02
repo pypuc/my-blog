@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-      <form class="search-form" id="search-form">
-    <input type="text" name="query" autocomplete="off" placeholder="Search images..." />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1 class="title">Це новий Pinterest</h1>
+   <form class="search-form" id="search-form">
+    <input type="text" name="query" autocomplete="off" placeholder="шукати картинку(пиши на англійській мові)..." />
   </form>
 
   <ul class="gallery" id="gallery"></ul>
 
   <button id="load-more" style="display: none;">Load more</button>
-    <script src="./script.js"></script>
-</body>
+
+    <script type="module" src="./script.js"></script>
+  </body>
 </html>

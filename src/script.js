@@ -1,5 +1,5 @@
-const API_KEY = 'YOUR_PIXABAY_API_KEY';
-const BASE_URL = 'https://pixabay.com/api/';
+import { fetchImages } from './api/fetchImages.js';
+
 let currentPage = 1;
 let currentQuery = '';
 
@@ -10,20 +10,6 @@ const loadMoreBtn = document.getElementById('load-more');
 form.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-async function fetchImages(query, page = 1) {
-  const url = `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(
-    query
-  )}&image_type=photo&orientation=horizontal&per_page=12&page=${page}`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.hits;
-  } catch (error) {
-    console.error('Error fetching images:', error);
-    return [];
-  }
-}
-
 async function onSearch(e) {
   e.preventDefault();
   const query = e.target.elements.query.value.trim();
@@ -32,7 +18,7 @@ async function onSearch(e) {
   currentQuery = query;
   currentPage = 1;
   gallery.innerHTML = '';
-  const images = await fetchImages(query, currentPage);
+  const images = await fetchImages(currentQuery, currentPage);
   renderImages(images);
   loadMoreBtn.style.display = images.length < 12 ? 'none' : 'block';
 }
@@ -42,7 +28,6 @@ async function onLoadMore() {
   const images = await fetchImages(currentQuery, currentPage);
   renderImages(images);
 
-  // Плавний скрол до нових елементів
   const lastCard = gallery.lastElementChild;
   if (lastCard) {
     lastCard.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -52,9 +37,7 @@ async function onLoadMore() {
 }
 
 function renderImages(images) {
-  const markup = images
-    .map(
-      img => `
+  const markup = images.map(img => `
     <li>
       <div class="photo-card">
         <img src="${img.webformatURL}" alt="${img.tags}" loading="lazy" />
@@ -74,8 +57,7 @@ function renderImages(images) {
         </div>
       </div>
     </li>
-  `
-    )
-    .join('');
+  `).join('');
+
   gallery.insertAdjacentHTML('beforeend', markup);
 }
