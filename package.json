@@ -2,11 +2,22 @@
   "name": "see-pictures",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "homepage": "https://pypuc.github.io/see-pictures/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx parcel src/index.html",
+    "server": "npx json-server students.json",
+    "build": "parcel build src/index.html --no-cache",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
