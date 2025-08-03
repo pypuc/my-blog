@@ -6,7 +6,7 @@ export async function getPosts(page = 1, limit = 5, query = '') {
     const res = await fetch(url);
     return await res.json();
   } catch (err) {
-    console.error('Помилка при отриманні постів:', err);
+    console.error('Помилка при отриманні постів:');
   }
 }
 
@@ -19,7 +19,7 @@ export async function createPost(title, content) {
     });
     return await res.json();
   } catch (err) {
-    console.error('Помилка при створенні поста:', err);
+    console.error('Помилка при створенні поста:');
   }
 }
 
@@ -27,6 +27,6 @@ export async function deletePost(id) {
   try {
     await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
   } catch (err) {
-    console.error('Помилка при видаленні поста:', err);
+    console.error('Помилка при видаленні поста:', er);
   }
 }
