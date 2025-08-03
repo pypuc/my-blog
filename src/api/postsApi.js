@@ -1,11 +1,12 @@
 const BASE_URL = 'http://localhost:3000/posts';
 
-export async function getPosts() {
+export async function getPosts(page = 1, limit = 5, query = '') {
   try {
-    const res = await fetch(BASE_URL);
+    const url = `${BASE_URL}?_page=${page}&_limit=${limit}&q=${query}`;
+    const res = await fetch(url);
     return await res.json();
   } catch (err) {
-    console.error('Помилка завантаження постів:', err);
+    console.error('Помилка при отриманні постів:', err);
   }
 }
 
@@ -18,20 +19,7 @@ export async function createPost(title, content) {
     });
     return await res.json();
   } catch (err) {
-    console.error('Помилка створення поста:', err);
-  }
-}
-
-export async function updatePost(id, title, content) {
-  try {
-    const res = await fetch(`${BASE_URL}/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, content }),
-    });
-    return await res.json();
-  } catch (err) {
-    console.error('Помилка оновлення поста:', err);
+    console.error('Помилка при створенні поста:', err);
   }
 }
 
@@ -39,6 +27,6 @@ export async function deletePost(id) {
   try {
     await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
   } catch (err) {
-    console.error('Помилка видалення поста:', err);
+    console.error('Помилка при видаленні поста:', err);
   }
 }

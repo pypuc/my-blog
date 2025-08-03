@@ -9,15 +9,19 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1 class="title">Це новий Pinterest</h1>
-   <form class="search-form" id="search-form">
-    <input type="text" name="query" autocomplete="off" placeholder="шукати картинку(пиши на англійській мові)..." />
+   <h1>Блог</h1>
+
+  <form id="createPostForm">
+    <input type="text" id="titleInput" placeholder="Заголовок" required>
+    <textarea id="contentInput" placeholder="Зміст" required></textarea>
+    <button type="submit">Створити пост</button>
   </form>
 
-  <ul class="gallery" id="gallery"></ul>
+  <input type="text" id="searchInput" placeholder="Пошук постів...">
 
-  <button id="load-more" style="display: none;">Load more</button>
+  <div id="postsContainer"></div>
 
+  <button id="loadMore">Завантажити ще</button>
     <script type="module" src="./script.js"></script>
   </body>
 </html>
