@@ -9,19 +9,18 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-   <h1>Блог</h1>
+   <h1>Мій блог</h1>
+   <div class="input-container">
 
-  <form id="createPostForm">
-    <input type="text" id="titleInput" placeholder="Заголовок" required>
-    <textarea id="contentInput" placeholder="Зміст" required></textarea>
-    <button type="submit">Створити пост</button>
+  <input class="input-search" type="text" id="search" placeholder="Пошук постів..." />
+</div>
+  <form class="post-form" id="post-form">
+    <input type="text" maxlength="26" id="title" placeholder="Заголовок" required />
+    <input id="body" maxlength="36" placeholder="Текст посту" required></textarea>
+    <button class="add-button" type="submit">Додати пост</button>
   </form>
 
-  <input type="text" id="searchInput" placeholder="Пошук постів...">
-
-  <div id="postsContainer"></div>
-
-  <button id="loadMore">Завантажити ще</button>
+  <div id="posts" class="posts-grid"></div>
     <script type="module" src="./script.js"></script>
   </body>
 </html>
